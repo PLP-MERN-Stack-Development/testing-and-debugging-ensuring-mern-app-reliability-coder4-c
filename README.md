@@ -1,87 +1,73 @@
 # Testing and Debugging MERN Applications
 
-This assignment focuses on implementing comprehensive testing strategies for a MERN stack application, including unit testing, integration testing, and end-to-end testing, along with debugging techniques.
+This repository contains starter code and a fully scaffolded testing and debugging setup for a MERN application. It includes unit and integration tests, a VS Code debug configuration, and in-memory database support for fast, isolated server tests.
 
-## Assignment Overview
+## Quick project status
 
-You will:
-1. Set up testing environments for both client and server
-2. Write unit tests for React components and server functions
-3. Implement integration tests for API endpoints
-4. Create end-to-end tests for critical user flows
-5. Apply debugging techniques for common MERN stack issues
+- Client unit tests: passing (see `client/src/tests/unit/Button.test.jsx`)
+- Server integration tests: passing (in-memory MongoDB via mongodb-memory-server)
+- Coverage: overall ~85% (see `coverage/` after running tests)
 
-## Project Structure
+For a full, machine-readable test report and debugging guide see `TEST_RESULTS.md` and `README_DEBUGGER.md`.
 
-```
-mern-testing/
-├── client/                 # React front-end
-│   ├── src/                # React source code
-│   │   ├── components/     # React components
-│   │   ├── tests/          # Client-side tests
-│   │   │   ├── unit/       # Unit tests
-│   │   │   └── integration/ # Integration tests
-│   │   └── App.jsx         # Main application component
-│   └── cypress/            # End-to-end tests
-├── server/                 # Express.js back-end
-│   ├── src/                # Server source code
-│   │   ├── controllers/    # Route controllers
-│   │   ├── models/         # Mongoose models
-│   │   ├── routes/         # API routes
-│   │   └── middleware/     # Custom middleware
-│   └── tests/              # Server-side tests
-│       ├── unit/           # Unit tests
-│       └── integration/    # Integration tests
-├── jest.config.js          # Jest configuration
-└── package.json            # Project dependencies
+## Quick start
+
+1. Install dependencies
+
+```bash
+npm install
 ```
 
-## Getting Started
+2. Run all tests
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week6-Assignment.md` file
-4. Explore the starter code and existing tests
-5. Complete the tasks outlined in the assignment
+```bash
+npm test
+```
 
-## Files Included
+3. Run only client unit tests
 
-- `Week6-Assignment.md`: Detailed assignment instructions
-- Starter code for a MERN application with basic test setup:
-  - Sample React components with test files
-  - Express routes with test files
-  - Jest and testing library configurations
-  - Example tests for reference
+```bash
+npm run test:unit
+```
 
-## Requirements
+4. Run only server integration tests
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Basic understanding of testing concepts
+```bash
+npm test -- server
+```
 
-## Testing Tools
+5. Run tests in watch mode (development)
 
-- Jest: JavaScript testing framework
-- React Testing Library: Testing utilities for React
-- Supertest: HTTP assertions for API testing
-- Cypress/Playwright: End-to-end testing framework
-- MongoDB Memory Server: In-memory MongoDB for testing
+```bash
+npm run test:watch
+```
 
-## Submission
+## Debugging in VS Code
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+- Open the Run & Debug view (Ctrl+Shift+D).
+- Use the "Debug Jest Tests (npm run test:debug)" launch configuration to run Jest under the Node inspector. This uses `--runInBand` so breakpoints will be hit.
+- To attach to a running Node server, use the "Attach to Node (9229)" configuration.
 
-1. Complete all required tests (unit, integration, and end-to-end)
-2. Achieve at least 70% code coverage for unit tests
-3. Document your testing strategy in the README.md
-4. Include screenshots of your test coverage reports
-5. Demonstrate debugging techniques in your code
+## Where to look next
+
+- `README_DEBUGGER.md` — Detailed debugging setup and examples
+- `TEST_RESULTS.md` — Test run summary and coverage results
+- `server/src/` — Server code (Express routes, models, utils)
+- `client/src/` — Client React components and unit tests
+
+## Notes and tips
+
+- Integration tests use an in-memory MongoDB server; the first run may download a MongoDB binary and take ~30–60s.
+- If tests time out when the in-memory DB initializes, rerun with an increased timeout: `npm test -- --testTimeout=60000`.
+- When debugging tests, prefer the VS Code launch configuration to ensure the debugger attaches correctly.
 
 ## Resources
 
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Supertest Documentation](https://github.com/visionmedia/supertest)
-- [Cypress Documentation](https://docs.cypress.io/)
-- [MongoDB Testing Best Practices](https://www.mongodb.com/blog/post/mongodb-testing-best-practices) 
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Supertest](https://github.com/visionmedia/supertest)
+- [MongoDB Memory Server](https://github.com/nodkz/mongodb-memory-server)
+
+---
+
+If you want anything added to this README (badges, contributor instructions, CI steps, or a shorter student-facing checklist), tell me which and I'll add it.
